@@ -125,7 +125,7 @@ const SignInScreen = ({navigation}) =>{
             <View style={styles.button}>
                 <TouchableOpacity
                     style={styles.signIn}
-                    onPress={() => {loginHandle( data.username, data.password )}}
+                    onPress={() => navigation.navigate('MasterScreen')}
                 >
                 <LinearGradient
                     colors={['#08d4c4', '#01ab9d']}

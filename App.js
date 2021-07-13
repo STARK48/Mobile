@@ -16,10 +16,10 @@ const App = () =>{
   return (
 
   <NavigationContainer>
-      <Drawer.Navigator drawerContent={props =><DrawerContent {...props}/>} initialRouteName="Home">
+      {/* <Drawer.Navigator drawerContent={props =><DrawerContent {...props}/>} initialRouteName="Home">
         <Drawer.Screen name="Home" component={MainScreen} />        
-      </Drawer.Navigator>
-      {/* <RootStackScreen/> */}
+      </Drawer.Navigator> */}
+      <RootStackScreen/>
     </NavigationContainer>);
 }
 

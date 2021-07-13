@@ -199,7 +199,7 @@ const SignUpScreen = ({navigation}) =>{
                     style={[styles.signIn, {
                         borderColor: '#009387',
                         borderWidth: 1,
-                        marginTop: 15
+                        marginTop:5
                     }]}
                 >
                     <Text style={[styles.textSign, {
@@ -227,12 +227,13 @@ const styles = StyleSheet.create({
       paddingBottom: 50
   },
   footer: {
-      flex: 4,
+      flex:5,
       backgroundColor: '#fff',
       borderTopLeftRadius: 30,
       borderTopRightRadius: 30,
       paddingHorizontal: 20,
-      paddingVertical: 30
+      paddingVertical: 30,
+      
   },
   text_header: {
       color: '#fff',
@@ -269,7 +270,8 @@ const styles = StyleSheet.create({
   },
   button: {
       alignItems: 'center',
-      marginTop: 50
+      marginTop: 10,
+      marginBottom:20
   },
   signIn: {
       width: '100%',
