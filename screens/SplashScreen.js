@@ -24,7 +24,7 @@ const SplashScreen = ({navigation}) =>{
                 <Text style={styles.title}>Stay connected with everyone</Text>
                 <Text style={styles.text}>Sign in with acount</Text>
                     <View style={styles.button}>
-                        <TouchableOpacity onPress={()=>(alert('click'))}>
+                        <TouchableOpacity >
                             <LinearGradient 
                                 colors={['#08d4c4','#01ab9d']}
                                 style={styles.signIn}
@@ -37,6 +37,18 @@ const SplashScreen = ({navigation}) =>{
                                     color="#fff"
                                     size={20} 
                                 ></Icon>
+                            </LinearGradient>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={{marginTop:20}} >
+                            <LinearGradient 
+                                colors={['#04d4c5','#05ab7d']}
+                                style={styles.signIn}
+                                >
+                                <Text style={styles.textSign} 
+                                onPress={()=>navigation.navigate("OnBoardScreen")}
+                                >Go OnBoardScreen</Text>
+                                
                             </LinearGradient>
                         </TouchableOpacity>
                     </View>

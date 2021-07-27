@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Text, View,Button,Dimensions,StyleSheet,Image,TouchableOpacity,Platform,TextInput,StatusBar } from 'react-native'
+import { Text, View,Button,Dimensions,StyleSheet,Image,TouchableOpacity,Platform,TextInput,StatusBar, ImageBackground } from 'react-native'
 
 import LinearGradient from 'react-native-linear-gradient';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/Ionicons';
+import COLORS from '../consts/colors';
 
 
 const SignInScreen = ({navigation}) =>{
@@ -47,10 +48,14 @@ const SignInScreen = ({navigation}) =>{
   }
     return(
       <View style={styles.container}>
-        <StatusBar backgroundColor='#009387' barStyle="light-content"/>
-        <View style={styles.header}>
-          <Text style={styles.text_header} >Welcome</Text>
-         </View>
+        <StatusBar translucent backgroundColor="rgba(0,0,0,0)"/>
+          <ImageBackground style={{flex:1}} source={require('../assets/onboardImage.jpg')}>
+            <View style={styles.header}>
+              <Text style={styles.text_header} >Welcome</Text>
+          </View>
+          
+
+          
 
          <Animatable.View 
           animation="fadeInUpBig"
@@ -59,7 +64,7 @@ const SignInScreen = ({navigation}) =>{
             <View style={styles.action}>
               <Icon
               name="person-outline"
-              color="#05375a"
+              color={COLORS.primary}
               size={20}
               />
 
@@ -82,11 +87,11 @@ const SignInScreen = ({navigation}) =>{
           
             </View>
 
-            <Text style={styles.text_footer,{marginTop:35}}>Password</Text>
+            <Text style={styles.text_footer}>Password</Text>
             <View style={styles.action}>
               <Icon
               name="lock-closed-outline"
-              color="#05375a"
+              color={COLORS.primary}
               size={20}
               />
 
@@ -128,7 +133,7 @@ const SignInScreen = ({navigation}) =>{
                     onPress={() => navigation.navigate('MasterScreen')}
                 >
                 <LinearGradient
-                    colors={['#08d4c4', '#01ab9d']}
+                    colors={[COLORS.primary, COLORS.primary]}
                     style={styles.signIn}
                 >
                     <Text style={[styles.textSign, {
@@ -140,17 +145,18 @@ const SignInScreen = ({navigation}) =>{
                 <TouchableOpacity
                     onPress={() => navigation.navigate('SignUpScreen')}
                     style={[styles.signIn, {
-                        borderColor: '#009387',
+                        borderColor: COLORS.primary,
                         borderWidth: 1,
                         marginTop: 15
                     }]}
                 >
                     <Text style={[styles.textSign, {
-                        color: '#009387'
+                        color: COLORS.primary
                     }]}>Sign Up</Text>
                 </TouchableOpacity>
             </View>
-         </Animatable.View>      
+         </Animatable.View>  
+         </ImageBackground>    
       </View>
     );
   };
@@ -171,20 +177,25 @@ const styles = StyleSheet.create({
   },
   footer: {
       flex: 3,
-      backgroundColor: '#fff',
-      borderTopLeftRadius: 30,
-      borderTopRightRadius: 30,
+      backgroundColor: 'rgba(52, 52, 52, 0.4)',
+      borderRadius:20,
+      // borderTopLeftRadius: 30,
+      // borderTopRightRadius: 30,
       paddingHorizontal: 20,
-      paddingVertical: 30
+      paddingVertical: 30,
+      marginHorizontal:10,
+      marginVertical:10,
   },
   text_header: {
       color: '#fff',
       fontWeight: 'bold',
-      fontSize: 30
+      fontSize: 30,
+      marginTop:15
   },
   text_footer: {
-      color: '#05375a',
-      fontSize: 18
+      color: COLORS.white,
+      fontSize: 18,
+      marginTop:15
   },
   action: {
       flexDirection: 'row',
@@ -204,7 +215,7 @@ const styles = StyleSheet.create({
       flex: 1,
       marginTop: Platform.OS === 'ios' ? 0 : -12,
       paddingLeft: 10,
-      color: '#05375a',
+      color: COLORS.white,
   },
   errorMsg: {
       color: '#FF0000',
