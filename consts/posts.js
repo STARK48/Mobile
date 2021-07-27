@@ -10,7 +10,32 @@ const posts = [
         userCategoryIcon:'home-outline',
         likes:[],
         likeCount:'15',        
-        comments:[],
+        comments:[
+            {
+            id:'457',
+            userId:'154',
+            userName:'Jordin Sparks',
+            userImgProfile:require('../assets/team_4.jpg'),
+            body:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Consequat nisl vel pretium lectus quam id leo. Velit euismod in pellentesque massa placerat duis ultricies lacus sed. Justo laoreet sit amet cursus sit.',
+            createdAt:''
+        },
+        {
+            id:'459',
+            userId:'154',
+            userName:'Chris Brown',
+            userImgProfile:require('../assets/team_1.jpg'),
+            body:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Consequat nisl vel pretium lectus quam id leo. Velit euismod in pellentesque massa placerat duis ultricies lacus sed. Justo laoreet sit amet cursus sit.',
+            createdAt:''
+        },
+        {
+            id:'458',
+            userId:'154',
+            userName:'Nail Horan',
+            userImgProfile:require('../assets/team_3.jpg'),
+            body:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Consequat nisl vel pretium lectus quam id leo. Velit euismod in pellentesque massa placerat duis ultricies lacus sed. Justo laoreet sit amet cursus sit.',
+            createdAt:''
+        },
+    ],
         commentCount:'4',
         postImage:'',
         createdAt:''
@@ -27,7 +52,16 @@ const posts = [
         userCategoryIcon:'bed-outline',
         likes:[],
         likeCount:'78',        
-        comments:[],
+        comments:[
+            {
+                id:'445',
+                userId:'154',
+                userName:'Jordin Sparks',
+                userImgProfile:require('../assets/team_4.jpg'),
+                body:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Consequat nisl vel pretium lectus quam id leo. Velit euismod in pellentesque massa placerat duis ultricies lacus sed. Justo laoreet sit amet cursus sit.',
+                createdAt:''
+            }
+        ],
         commentCount:'12',
         postImage:require('../assets/gts.jpg'),
         createdAt:''

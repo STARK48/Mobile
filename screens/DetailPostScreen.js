@@ -8,6 +8,23 @@ import COLORS from '../consts/colors';
 const DetailPostScreen = ({navigation,route}) => { 
 
     const post = route.params;
+
+    const Comment = ({comment}) => (
+        <View style={styles.commentContainer}> 
+                        <View style={{marginRight:10}}>
+                            <Avatar.Image 
+                            source ={comment.userImgProfile}
+                            size={35}
+                            /> 
+                        </View>
+
+                        <View style={styles.comment}>
+                            <Text >{comment.body}</Text>
+                        </View>
+                        
+                        
+        </View>
+    )
     
     return(
     
@@ -79,17 +96,35 @@ const DetailPostScreen = ({navigation,route}) => {
 
                 <View style={styles.inputContainer}>
                     <TextInput placeholder="Comments" multiline = {true}
-numberOfLines = {3} style={{color:COLORS.grey}}></TextInput>
+numberOfLines = {2} style={{color:COLORS.grey}}></TextInput>
                     <Icon name="paper-plane-outline" size={25} color={COLORS.primary} ></Icon>
                 </View>
 
-                <View style={styles.commentContainer}> 
-                    <Avatar.Image 
-                        source ={post.userImgProfile}
-                        size={35}
-                        /> 
-                    <TextInput placeholder="Comments" style={{color:COLORS.grey,elevation:2}}></TextInput>
+                <View style={{marginVertical:20}}>
+
+                    {post.comments.map((item) => {
+                        return(<Comment index={item.id} comment={item} />)
+                    })}
+                    
+
+                    <View style={styles.commentContainer}> 
+                        <View style={{marginRight:10}}>
+                            <Avatar.Image 
+                            source ={post.userImgProfile}
+                            size={35}
+                            /> 
+                        </View>
+
+                        <View style={styles.comment}>
+                            <Text  >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Consequat nisl vel pretium lectus quam id leo. Velit euismod in pellentesque massa placerat duis ultricies lacus sed. Justo laoreet sit amet cursus sit.</Text>
+                        </View>
+                        
+                        
+                    </View>
+
+                   
                 </View>
+
             </View>
 
             
@@ -179,10 +214,19 @@ inputContainer:{
     //top:70
   },
   commentContainer:{
-      margin:20,
+      marginHorizontal:20,
+      marginVertical:10,
       flexDirection:'row',
-      justifyContent:'space-between',
+      justifyContent:'flex-start',
       elevation:2,
-      alignItems:'flex-start'
-  }
+      width:'100%'
+      //alignItems:'flex-start'
+  },
+  comment:{
+      elevation:2,
+      borderRadius:5,
+      paddingHorizontal:15,
+      paddingVertical:10,
+      width:'80%'
+    }
 })
