@@ -15,7 +15,7 @@ const DetailPlaceScreen = ({navigation,route}) =>{
       }} 
       >
         <StatusBar translucent backgroundColor="rgba(0,0,0,0)"></StatusBar>
-        <ImageBackground style={{flex:0.7}} source={place.image}>
+        <ImageBackground style={{flex:0.7}} source={place.coverImage}>
           <View style={styles.header}>
             <Icon name="ios-arrow-back-outline" size={28} color={COLORS.white} onPress={()=>navigation.goBack()}></Icon>
           </View>
@@ -45,10 +45,10 @@ const DetailPlaceScreen = ({navigation,route}) =>{
 
           <View style={{flexDirection:'row',marginTop:10}}>
             <Icon name="location-outline" size={25} color={COLORS.primary}></Icon>
-            <Text style={{color:COLORS.primary,fontSize:20,fontWeight:'bold',marginLeft:5}}>{place.location}</Text>
+            <Text style={{color:COLORS.primary,fontSize:20,fontWeight:'bold',marginLeft:5}}>{place.region}</Text>
           </View>
-          <Text style={{marginTop:20,fontWeight:'bold',fontSize:20}}>About the trip</Text>
-          <Text style={{marginTop:20,lineHeight:22}}>{place.details}</Text>
+          <Text style={{marginTop:20,fontWeight:'bold',fontSize:20}}>About the Place</Text>
+          <Text style={{marginTop:20,lineHeight:22}}>{place.description}</Text>
         </View>
       </SafeAreaView>
     );

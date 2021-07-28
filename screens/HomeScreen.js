@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import COLORS from '../consts/colors';
 import places from '../consts/places';
 import operators from '../consts/operators';
+import sites  from '../consts/sites';
 
 
 //import OperatorCard from '../components/operatorCard'
@@ -36,13 +37,13 @@ const HomeScreen = ({navigation}) =>{
      </View>
    );
 
-   const Card = ({place}) => (
+   const Card = ({site}) => (
 
     <TouchableOpacity
     activeOpacity={0.8}
-    onPress={()=>navigation.navigate('DetailPlaceScreen',place)}
+    onPress={()=>navigation.navigate('DetailPlaceScreen',site)}
     >
-     <ImageBackground style={styles.cardImage} source={place.image}>
+     <ImageBackground style={styles.cardImage} source={site.coverImage}>
        <Text
         style={{
           color:COLORS.white,
@@ -51,7 +52,7 @@ const HomeScreen = ({navigation}) =>{
           marginTop:10,
         }}
        >
-         {place.name}
+         {site.name}
        </Text>
        <View
        style={{
@@ -64,13 +65,13 @@ const HomeScreen = ({navigation}) =>{
          <View style={{flexDirection:'row'}}>
             <Icon name="location-outline" size={20} color={COLORS.white} />
             <Text style={{marginLeft:5,color:COLORS.white}}>
-              {place.location}
+              {site.region}
             </Text>
          </View>
          <View style={{flexDirection:'row'}}>
-            <Icon name="star-outline" size={20} color={COLORS.white} />
+            <Icon name={site.categoryIcon} size={20} color={COLORS.white} />
             <Text style={{marginLeft:5,color:COLORS.white}}>
-              5.0
+              {sites.categoryName}
             </Text>
          </View>
 
@@ -198,8 +199,8 @@ const HomeScreen = ({navigation}) =>{
               contentContainerStyle={{paddingLeft:20}}
               horizontal
               showsVerticalScrollIndicator={false}
-              data={places}
-              renderItem={({item}) => <Card place={item}/>}
+              data={sites}
+              renderItem={({item}) => <Card site={item}/>}
             />
             
           

@@ -1,32 +1,57 @@
 import React, { Component } from 'react'
-import { Text, View ,StyleSheet ,ScrollView , StatusBar ,SafeAreaView ,TextInput, FlatList} from 'react-native'
+import { Text, View ,StyleSheet ,ScrollView , StatusBar ,SafeAreaView ,TextInput, FlatList,Image,Dimensions, TouchableOpacity} from 'react-native'
 
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import COLORS from '../consts/colors';
 
 import categorySite from '../consts/categorySite';
+import sites from '../consts/sites';
 
+const {width} = Dimensions.get('screen')
 
 const PlacesScreen = ({navigation}) =>{
 
-  const categoryIcons = [
-    <Icon name="airplane-outline" size={25} color={COLORS.primary}></Icon>,
-    <Icon name="umbrella-outline" size={25} color={COLORS.primary}></Icon>,
-    <Icon name="compass-outline" size={25} color={COLORS.primary}></Icon>,
-    <Icon name="location-outline" size={25} color={COLORS.primary}></Icon>,
-    <Icon name="hourglass" size={25} color={COLORS.primary}></Icon>,
-  ]
+  const PlaceCard = ({site}) =>(
+    <TouchableOpacity 
+    onPress ={()=>navigation.navigate('DetailPlaceScreen',site)}
+    >
+        <View style={styles.place}>
+          <Image style={styles.placeCardImage} source={site.coverImage}/>
+          <View style={styles.placeDescription}>
+            <View style={{flexDirection:'row'}}>
+                <Icon name="location-outline" size={20} color={COLORS.primary} />
+                <Text style={{marginLeft:5,color:COLORS.primary,fontWeight:'bold'}}>
+                  {site.name}
+                </Text>
+            </View>
+            
 
-   const ListCategory = () => (
-     <View style={styles.categoryContainer}>
-        {categoryIcons.map((icon,index) =>(
-          <View key={index} style={styles.iconContainer}>
-            {icon}
+            <View style={{flexDirection:'row'}}>
+              <View style={styles.placeDescriptionIcon}>
+                <Icon name={site.categoryIcon} color={COLORS.primary}  size={15} style={{marginRight:4}}/>
+                <Text style={{color: COLORS.primary,fontSize:11}}>{site.categoryName}</Text>
+              </View>
+
+              <View style={styles.placeDescriptionIcon}>
+                <Icon name='ios-compass-outline' color={COLORS.primary}  size={15} style={{marginRight:4}}/>
+                <Text style={{color: COLORS.primary,fontSize:11}}>{site.region}</Text>
+              </View>
+            </View>
+
+
+            <View style={styles.detail}>
+            <Text numberOfLines={3} style={{fontSize:11}} >{site.description}</Text>
+            </View>
+
+            
+            
+
+
           </View>
-        ))}
-     </View>
-   );  
+        </View>
+    </TouchableOpacity>
+  )
 
    const CategoryCard = ({categorySite}) => (
     <View style={styles.iconContainer}>
@@ -69,15 +94,21 @@ return(
             //paddingHorizontal:20
           }}
           >
-          <FlatList
-          //contentContainerStyle={{paddingLeft:20}}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          data={categorySite}
-          renderItem={({item}) => <CategoryCard categorySite={item}/>}
-          >
+              <FlatList
+              
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              data={categorySite}
+              renderItem={({item}) => <CategoryCard categorySite={item}/>}
+              >
 
-          </FlatList>  
+              </FlatList>  
+          </View>
+
+          <View style={styles.contPlaces}>
+              {sites.map((item) => {
+                return(<PlaceCard site={item}/>)                
+              })}              
           </View>
 
           
@@ -149,4 +180,44 @@ const styles =StyleSheet.create({
         marginHorizontal:5,
         paddingHorizontal:5,
       },
+      contPlaces:{
+        marginHorizontal:10,
+        flexDirection:'column',
+        marginVertical:10
+      },
+      place:{
+        height:150,
+        borderRadius:10,
+        elevation:2,
+        marginVertical:5,
+        width:'100%',
+        flexDirection:'row'
+
+      },
+      placeCardImage:{
+        width:width /2.5,
+        height:140,
+        borderRadius:10,
+        margin:5
+
+      },
+      placeDescription:{
+        paddingVertical:10
+      },
+      placeDescriptionIcon: {
+        borderWidth:0.3,
+        backgroundColor: COLORS.white,
+        
+        flexDirection: 'row',
+        //justifyContent: 'space-between',
+        alignItems: 'center',
+        borderRadius: 5,
+        marginHorizontal:5,
+        marginVertical:5,
+        padding:5,
+      },
+      detail:{
+        width:width /2,
+        padding:10
+      }
 })
