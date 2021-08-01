@@ -17,6 +17,7 @@ import OnBoardScreen from './OnBoardScreen';
 import DetailPlaceScreen from './DetailPlaceScreen';
 import DetailOperatorScreen from './DetailOperatorScreen';
 import DetailPostScreen from './DetailPostScreen';
+import DetailEventScreen from './DetailEventScreen';
 
 
 const RootStack = createStackNavigator();
@@ -32,6 +33,7 @@ const RootStackScreen = ({navigation}) => (
         <RootStack.Screen name="DetailPlaceScreen" component={DetailPlaceScreen}/>
         <RootStack.Screen name="DetailOperatorScreen" component={DetailOperatorScreen}/>
         <RootStack.Screen name="DetailPostScreen" component={DetailPostScreen}/>
+        <RootStack.Screen name="DetailEventScreen" component={DetailEventScreen}/>
         
         
     </RootStack.Navigator>
