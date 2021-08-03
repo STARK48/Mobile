@@ -5,6 +5,8 @@ import {
 import { color } from 'react-native-reanimated';
 const {width} = Dimensions.get('screen');
 
+import { Badge } from 'react-native-paper';
+
 import Icon from 'react-native-vector-icons/Ionicons';
 import COLORS from '../consts/colors';
 import places from '../consts/places';
@@ -167,12 +169,15 @@ const HomeScreen = ({navigation}) =>{
             >
           </Icon.Button>
 
-          <Icon.Button
-            name="md-notifications-outline" size={25}
-            backgroundColor={COLORS.primary}
-            onPress={() => navigation.openDrawer()}
-            >
-          </Icon.Button>
+          
+          <TouchableOpacity onPress={() => navigation.navigate('CircuitScreen')}>
+            <View style={{marginHorizontal:10,marginTop:10,flexDirection:'row'}}>
+              
+              <Image style={{height:25,width:25}} source={require('../assets/circuit.png')}/>
+              <Badge size={18}>3</Badge>
+            </View>
+          </TouchableOpacity>
+          
         </View>
         
         <ScrollView showsVerticalScrollIndicator={false}>

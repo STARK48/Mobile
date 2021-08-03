@@ -6,52 +6,14 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import COLORS from '../consts/colors';
 
 import categorySite from '../consts/categorySite';
+import PlaceCard from '../components/PlaceCard';
 import sites from '../consts/sites';
 
 const {width} = Dimensions.get('screen')
 
 const PlacesScreen = ({navigation}) =>{
 
-  const PlaceCard = ({site}) =>(
-    <TouchableOpacity 
-    onPress ={()=>navigation.navigate('DetailPlaceScreen',site)}
-    >
-        <View style={styles.place}>
-          <Image style={styles.placeCardImage} source={site.coverImage}/>
-          <View style={styles.placeDescription}>
-            <View style={{flexDirection:'row'}}>
-                <Icon name="location-outline" size={20} color={COLORS.primary} />
-                <Text style={{marginLeft:5,color:COLORS.primary,fontWeight:'bold'}}>
-                  {site.name}
-                </Text>
-            </View>
-            
-
-            <View style={{flexDirection:'row'}}>
-              <View style={styles.placeDescriptionIcon}>
-                <Icon name={site.categoryIcon} color={COLORS.primary}  size={15} style={{marginRight:4}}/>
-                <Text style={{color: COLORS.primary,fontSize:11}}>{site.categoryName}</Text>
-              </View>
-
-              <View style={styles.placeDescriptionIcon}>
-                <Icon name='ios-compass-outline' color={COLORS.primary}  size={15} style={{marginRight:4}}/>
-                <Text style={{color: COLORS.primary,fontSize:11}}>{site.region}</Text>
-              </View>
-            </View>
-
-
-            <View style={styles.detail}>
-            <Text numberOfLines={3} style={{fontSize:11}} >{site.description}</Text>
-            </View>
-
-            
-            
-
-
-          </View>
-        </View>
-    </TouchableOpacity>
-  )
+  
 
    const CategoryCard = ({categorySite}) => (
     <View style={styles.iconContainer}>
@@ -107,7 +69,7 @@ return(
 
           <View style={styles.contPlaces}>
               {sites.map((item) => {
-                return(<PlaceCard site={item}/>)                
+                return(<PlaceCard key={item.id} site={item} navigation={navigation} />)                
               })}              
           </View>
 
