@@ -21,21 +21,25 @@ import DetailEventScreen from './DetailEventScreen';
 import CircuitScreen from './CircuitScreen';
 
 
+
+
 const RootStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
-const RootStackScreen = ({navigation}) => (
+const RootStackScreen = () => (
     <RootStack.Navigator headerMode='none'>
         <RootStack.Screen name="OnBoardScreen" component={OnBoardScreen}/>
         <RootStack.Screen name="SplashScreen" component={SplashScreen}/>
         <RootStack.Screen name="SignInScreen" component={SignInScreen}/>
         <RootStack.Screen name="SignUpScreen" component={SignUpScreen}/>
-        <RootStack.Screen name="MasterScreen" component={MasterScreen}/>
+        <RootStack.Screen name="MasterScreen" component={MasterScreen}/>  
         <RootStack.Screen name="DetailPlaceScreen" component={DetailPlaceScreen}/>
         <RootStack.Screen name="DetailOperatorScreen" component={DetailOperatorScreen}/>
         <RootStack.Screen name="DetailPostScreen" component={DetailPostScreen}/>
         <RootStack.Screen name="DetailEventScreen" component={DetailEventScreen}/>
         <RootStack.Screen name="CircuitScreen" component={CircuitScreen}/>
+        
+
         
         
     </RootStack.Navigator>
@@ -47,11 +51,12 @@ const MasterScreen = () =>{
     return (
   
         <Drawer.Navigator drawerContent={props =><DrawerContent {...props}/>} initialRouteName="Home">
-          <Drawer.Screen name="Home" component={MainScreen} />        
+          <Drawer.Screen name="Home" component={MainScreen} />               
         </Drawer.Navigator>
         
     );
   }
 
+  
 export default RootStackScreen;
 

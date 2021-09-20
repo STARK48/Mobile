@@ -2,7 +2,7 @@ const operators = [
 {
     id:'43',
     name:'Hotel Ranja',
-    about:'Chambre tous comfort et piscine.',
+    about:`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Consequat nisl vel pretium lectus quam id leo. Velit euismod in pellentesque massa placerat duis ultricies lacus sed. Justo laoreet sit amet cursus sit.`,
     mail:'ranjahotel@gmail.com',
     phone:'+261 20 75 507 97',
     whatsapp:'+261 20 75 507 97',
@@ -21,7 +21,7 @@ const operators = [
 {
     id:'47',
     name:'Mada Tropic',
-    about:'Location de voiture',
+    about:`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Consequat nisl vel pretium lectus quam id leo. Velit euismod in pellentesque massa placerat duis ultricies lacus sed. Justo laoreet sit amet cursus sit.`,
     mail:'mada@gmail.com',
     phone:'+261 20 75 507 97',
     whatsapp:'+261 20 75 507 97',
