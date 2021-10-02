@@ -3,22 +3,25 @@ import { Text, View,StyleSheet,TouchableOpacity,Image,Dimensions } from 'react-n
 import Icon from 'react-native-vector-icons/Ionicons';
 import COLORS from '../consts/colors';
 
+import { BASE_URL } from '../config';
+
 const {width} = Dimensions.get('screen')
 
 
-const PlaceCard = ({site,navigation}) => { return(
+const PlaceCard = ({place,navigation}) => { return(
     <TouchableOpacity 
-    onPress ={()=>navigation.navigate('DetailPlaceScreen',site)}
+    onPress ={()=>navigation.navigate('DetailPlaceScreen',place)}
     >
         <View style={styles.place}>
-          <Image style={styles.placeCardImage} source={site.coverImage}/>
+          <Image style={styles.placeCardImage} source={{uri:BASE_URL+place.coverImage}}/>
           <View style={styles.placeDescription}>
             <View style={{flexDirection:'row',justifyContent:'space-between'}}>
 
               <View style={{flexDirection:'row'}}>
-                  <Icon name="location-outline" size={20} color={COLORS.primary} />
+                <Image style={styles.placeCardImage} source={{uri:BASE_URL+place.category.categoryPlaceIcon}} height={20} width={20}/>
+                  
                   <Text style={{marginLeft:5,color:COLORS.primary,fontWeight:'bold'}}>
-                    {site.name}
+                    {place.placeName}
                   </Text>
               </View>
 
@@ -27,19 +30,19 @@ const PlaceCard = ({site,navigation}) => { return(
 
             <View style={{flexDirection:'row'}}>
               <View style={styles.placeDescriptionIcon}>
-                <Icon name={site.categoryIcon} color={COLORS.primary}  size={15} style={{marginRight:4}}/>
-                <Text style={{color: COLORS.primary,fontSize:11}}>{site.categoryName}</Text>
+                <Icon name={place.categoryIcon} color={COLORS.primary}  size={15} style={{marginRight:4}}/>
+                <Text style={{color: COLORS.primary,fontSize:11}}>{place.category.categoryPlaceName}</Text>
               </View>
 
               <View style={styles.placeDescriptionIcon}>
                 <Icon name='ios-compass-outline' color={COLORS.primary}  size={15} style={{marginRight:4}}/>
-                <Text style={{color: COLORS.primary,fontSize:11}}>{site.region}</Text>
+                <Text style={{color: COLORS.primary,fontSize:11}}>North</Text>
               </View>
             </View>
 
 
             <View style={styles.detail}>
-            <Text numberOfLines={3} style={{fontSize:11}} >{site.description}</Text>
+            <Text numberOfLines={3} style={{fontSize:11}} >{place.about}</Text>
             </View>
 
             <View style={{justifyContent:'space-between',flexDirection:'row'}}>
@@ -78,7 +81,7 @@ const styles = StyleSheet.create({
       },
       placeCardImage:{
         width:width /2.5,
-        height:140,
+        height:150,
         borderRadius:10,
         margin:5
 

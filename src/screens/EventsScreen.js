@@ -11,30 +11,44 @@ import COLORS from '../consts/colors';
 import events
  from '../consts/events';
 
+ import { GET_ALL_EVENTS } from '../graphql/request';
+
+import {  
+  useQuery
+} from "@apollo/client";
+
+import { BASE_URL } from '../config';
+
 const EventsScreen = ({navigation}) => {
+
+const {data,loading,error} = useQuery(GET_ALL_EVENTS);
+
+ if (loading || error) return null;    
 
   const EventCard = ({event}) => (
     <View style={styles.event}>
       
       <View>
-        {event.eventImage?(<Image style={styles.eventImage} source={event.eventImage}></Image>):null}
+        {/* {event.coverImage?(<Image style={styles.coverImage} source={{uri:BASE_URL+event.coverImage}}></Image>):null}
+        <Text>{BASE_URL+event.coverImage}</Text> */}
+        <Image style={styles.coverImage}  source={{uri:BASE_URL+event.coverImage}}/>
         
       </View>
 
       <View style={styles.eventTop}>
         <Avatar.Image 
-        source ={event.userImgProfile}
+        source={{uri:BASE_URL+event.postBy.profileImg}}
         size={35}
         />
         <View style={{marginLeft:15,flexDirection:'column'}}>
             <View style={{flexDirection:'row'}}>
-              <Text style={styles.title}>{event.userName}</Text>
-              <Icon name={event.userCategoryIcon} color={COLORS.primary}  size={16} style={{marginRight:5}}/>
-              <Text style={{color:COLORS.primary,fontSize:12}}>{event.userCategory}</Text>
+              <Text style={styles.title}>{event.postBy.userName}</Text>
+              <Icon name={event.postBy.categoryUserIcon} color={COLORS.primary}  size={16} style={{marginRight:5}}/>
+              <Text style={{color:COLORS.primary,fontSize:12}}>{event.postBy.categoryUserName}</Text>
             </View>
             
             <View style={styles.caption}>                        
-              <Text style={{color:COLORS.grey,fontSize:12}}>12 min ago</Text>
+              <Text style={{color:COLORS.grey,fontSize:12}}>{event.createdAt}</Text>
             </View>
         </View>
 
@@ -42,18 +56,18 @@ const EventsScreen = ({navigation}) => {
           
           <View style={{marginHorizontal:20,flexDirection:'row'}}>
             <Icon name='location-outline' size={22} color={COLORS.primary}/>
-            <Text style={{color:COLORS.primary,fontSize:12,marginHorizontal:10,marginVertical:2}}>{event.location}</Text>
+            <Text style={{color:COLORS.primary,fontSize:12,marginHorizontal:10,marginVertical:2}}>{event.place.placeName}</Text>
           </View>
 
           <View style={{marginHorizontal:20,flexDirection:'row'}}>
             <Icon name='md-calendar-outline' size={22} color={COLORS.primary}/>
-            <Text style={{color:COLORS.primary,fontSize:12,marginHorizontal:10,marginVertical:2}}>{event.dateBegin}</Text>
+            <Text style={{color:COLORS.primary,fontSize:12,marginHorizontal:10,marginVertical:2}}>{event.eventDate}</Text>
           </View>
         </View>
       </View>
       <View style={styles.eventBody}>
-        <Text style={{fontWeight:'bold'}}>{event.title}</Text>
-        <Paragraph numberOfLines={3} >{event.description}</Paragraph>
+        <Text style={{fontWeight:'bold'}}>{event.eventName}</Text>
+        <Paragraph numberOfLines={3} >{event.about}</Paragraph>
       </View>
 
       
@@ -72,7 +86,7 @@ const EventsScreen = ({navigation}) => {
         >
           <View style={styles.iconContainer}>
             <Icon name='ios-chatbox-outline' color={COLORS.primary}  size={18} style={{marginRight:5}}/>
-            <Text style={{color: COLORS.primary,fontSize:12}}>{event.commentCount}</Text>          
+            <Text style={{color: COLORS.primary,fontSize:12}}>0</Text>          
           </View>
         </TouchableOpacity>
 
@@ -118,8 +132,8 @@ return(
           
           <View style={styles.eventContainer}>
             {
-              events.map((item) => {
-                return(<EventCard event={item}/> )
+              data.getEvents.map((item) => {
+                return(<EventCard key={item.id} event={item}/> )
               })
             }      
               
@@ -202,7 +216,7 @@ alignItems: 'center',
 borderRadius: 10,    
 paddingHorizontal:10,
 },
-eventImage:{
+coverImage:{
 borderTopLeftRadius:10,
 borderTopRightRadius:10,
 borderBottomLeftRadius:30,

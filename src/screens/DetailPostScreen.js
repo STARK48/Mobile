@@ -4,6 +4,7 @@ import { Avatar,Title,Paragraph,Caption } from 'react-native-paper';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import COLORS from '../consts/colors';
+import { BASE_URL } from '../config';
 
 const DetailPostScreen = ({navigation,route}) => { 
 
@@ -13,13 +14,19 @@ const DetailPostScreen = ({navigation,route}) => {
         <View style={styles.commentContainer}> 
                         <View style={{marginRight:10}}>
                             <Avatar.Image 
-                            source ={comment.userImgProfile}
+                            source ={{uri:BASE_URL+comment.commentBy.profileImg}}
                             size={35}
                             /> 
                         </View>
 
-                        <View style={styles.comment}>
-                            <Text >{comment.body}</Text>
+                        <View >
+                            
+                            <View style={{marginBottom:5}}>
+                                <Text style={styles.title} >{comment.commentBy.userName}</Text>
+                            </View>
+                            <View style={styles.comment}>
+                                <Text >{comment.body}</Text>
+                            </View>
                         </View>
                         
                         
@@ -46,18 +53,18 @@ const DetailPostScreen = ({navigation,route}) => {
                 <View style={styles.post}>
                     <View style={styles.postTop}>
                         <Avatar.Image 
-                        source ={post.userImgProfile}
+                        source ={{uri:BASE_URL+post.postBy.profileImg}}
                         size={35}
                         />
                         <View style={{marginLeft:15,flexDirection:'column'}}>
                             <View style={{flexDirection:'row'}}>
-                            <Text style={styles.title}>{post.userName}</Text>
+                            <Text style={styles.title}>{post.postBy.userName}</Text>
                             <Icon name={post.userCategoryIcon} color={COLORS.primary}  size={16} style={{marginRight:5}}/>
-                            <Text style={{color:COLORS.primary,fontSize:12}}>{post.userCategory}</Text>
+                            <Text style={{color:COLORS.primary,fontSize:12}}>{post.postBy.category.categoryUserName}</Text>
                             </View>
                             
                             <View style={styles.caption}>                        
-                            <Text style={{color:COLORS.grey,fontSize:12}}>12 min ago</Text>
+                            <Text style={{color:COLORS.grey,fontSize:12}}>{post.createdAt}</Text>
                             </View>
                         </View>
                     </View>
@@ -100,14 +107,14 @@ numberOfLines = {2} style={{color:COLORS.grey}}></TextInput>
                     <Icon name="paper-plane-outline" size={25} color={COLORS.primary} ></Icon>
                 </View>
 
-                <View style={{marginVertical:20}}>
+                <View style={{marginVertical:20,width:'100%'}}>
 
                     {post.comments.map((item) => {
                         return(<Comment index={item.id} comment={item} />)
                     })}
                     
 
-                    <View style={styles.commentContainer}> 
+                    {/* <View style={styles.commentContainer}> 
                         <View style={{marginRight:10}}>
                             <Avatar.Image 
                             source ={post.userImgProfile}
@@ -120,7 +127,8 @@ numberOfLines = {2} style={{color:COLORS.grey}}></TextInput>
                         </View>
                         
                         
-                    </View>
+                    </View> */}
+
 
                    
                 </View>
@@ -165,7 +173,7 @@ const styles =StyleSheet.create({
     },
     title:{
     fontSize:12,
-    marginRight:5,
+    marginRight:10,
     fontWeight:'bold',
     },
     caption:{
@@ -219,14 +227,15 @@ inputContainer:{
       flexDirection:'row',
       justifyContent:'flex-start',
       elevation:2,
-      width:'100%'
-      //alignItems:'flex-start'
+      width:'80%',
+      alignItems:'flex-start',
+      
   },
   comment:{
       elevation:2,
       borderRadius:5,
       paddingHorizontal:15,
       paddingVertical:10,
-      width:'80%'
+      width:'100%'
     }
 })

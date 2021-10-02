@@ -1,31 +1,44 @@
 import React, { Component } from 'react'
-import { Text, View ,StyleSheet ,ScrollView , StatusBar ,SafeAreaView ,TextInput,Image,Dimensions, TouchableOpacity} from 'react-native'
+import { Text, View ,StyleSheet ,ScrollView , StatusBar ,SafeAreaView ,TextInput,Image,Dimensions, TouchableOpacity, FlatList} from 'react-native'
 import { Avatar,Title,Paragraph,Caption } from 'react-native-paper';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import COLORS from '../consts/colors';
 const {width} = Dimensions.get('screen');
 import posts from '../consts/posts';
+import { GET_ALL_POSTS } from '../graphql/request';
+
+import {  
+  useQuery
+} from "@apollo/client";
+
+import { BASE_URL } from '../config';
+
+
+
 
 const BlogScreen = ({navigation}) => {
 
+const {data,loading,error} = useQuery(GET_ALL_POSTS);
+
+ if (loading || error) return null;    
 
   const PostCard = ({post}) => (
     <View style={styles.post}>
       <View style={styles.postTop}>
         <Avatar.Image 
-        source ={post.userImgProfile}
+        source ={{uri:BASE_URL+post.postBy.profileImg}}
         size={35}
         />
         <View style={{marginLeft:15,flexDirection:'column'}}>
             <View style={{flexDirection:'row'}}>
-              <Text style={styles.title}>{post.userName}</Text>
-              <Icon name={post.userCategoryIcon} color={COLORS.primary}  size={16} style={{marginRight:5}}/>
-              <Text style={{color:COLORS.primary,fontSize:12}}>{post.userCategory}</Text>
+              <Text style={styles.title}>{post.postBy.userName}</Text>
+              <Icon name={post.postBy.category.categoryUserIcon} color={COLORS.primary}  size={16} style={{marginRight:5}}/>
+              <Text style={{color:COLORS.primary,fontSize:12}}>{post.postBy.category.categoryUserName}</Text>
             </View>
             
             <View style={styles.caption}>                        
-              <Text style={{color:COLORS.grey,fontSize:12}}>12 min ago</Text>
+              <Text style={{color:COLORS.grey,fontSize:12}}>{post.createdAt}</Text>
             </View>
         </View>
       </View>
@@ -102,8 +115,8 @@ return(
 
           <View style={styles.postContainer}>
             {
-              posts.map((item) => {
-                return(<PostCard post={item}/> )
+              data.getPosts.map((item) => {
+                return(<PostCard key={item.id} post={item}/> )
               })
             }      
               
@@ -113,7 +126,11 @@ return(
 
           
           
+
+          
+          
         </ScrollView>
+        
 </SafeAreaView>
 )
         }

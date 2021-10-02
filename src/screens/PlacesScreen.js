@@ -9,18 +9,24 @@ import categorySite from '../consts/categorySite';
 import PlaceCard from '../components/PlaceCard';
 import sites from '../consts/sites';
 
+
+import { GET_ALL_PLACES  } from '../graphql/request';
+
+import { useQuery } from '@apollo/client';
+import PlaceCategory from '../components/PlaceCategory';
+
 const {width} = Dimensions.get('screen')
 
 const PlacesScreen = ({navigation}) =>{
 
+  const {data,loading,error} = useQuery(GET_ALL_PLACES);
+
   
 
-   const CategoryCard = ({categorySite}) => (
-    <View style={styles.iconContainer}>
-      <Icon name={categorySite.categoryIcon} color={COLORS.primary}  size={18} style={{marginRight:5}}/>
-      <Text style={{color: COLORS.primary,fontSize:12}}>{categorySite.categoryName}</Text>
-    </View>
-   )
+  if (loading || error) return null;
+  
+
+   
 return(
     
 <SafeAreaView style={{flex:1,backgroundColor:COLORS.white}}>
@@ -49,38 +55,13 @@ return(
         </View>
         
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View 
-          style={{
-            backgroundColor:COLORS.primary,
-            height:40,
-            //paddingHorizontal:20
-          }}
-          >
-              <FlatList
-              
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              data={categorySite}
-              renderItem={({item}) => <CategoryCard categorySite={item}/>}
-              >
-
-              </FlatList>  
-          </View>
-
+          
+          <PlaceCategory />
           <View style={styles.contPlaces}>
-              {sites.map((item) => {
-                return(<PlaceCard key={item.id} site={item} navigation={navigation} />)                
+              {data.getPlaces.map((item) => {
+                return(<PlaceCard key={item.id} place={item} navigation={navigation} />)                
               })}              
           </View>
-
-          
-
-          
-          
-          
-
-          
-          
         </ScrollView>
 </SafeAreaView>
 )
